@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DATA POSITION LAB • ม.6</title>
+<style>
+:root{--navy:#172554;--blue:#3157d5;--sky:#eaf1ff;--gold:#f59e0b;--green:#16a34a;--red:#dc2626;--ink:#1f2937;--muted:#667085;--line:#e5e7eb;--bg:#f4f7fc}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eef3ff,#fbfcff);font-family:"Noto Sans Thai","Sarabun",Tahoma,sans-serif;color:var(--ink)}
+header{background:linear-gradient(135deg,#14235f,#4968e9);color:white;padding:28px 5vw;position:relative;overflow:hidden}header:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-130px;top:-210px;background:#ffffff16}.wrap{max-width:1280px;margin:auto}.badge{display:inline-block;background:#ffffff20;border:1px solid #ffffff45;border-radius:99px;padding:6px 12px;font-size:13px}.title{font-size:clamp(28px,4vw,46px);font-weight:900;margin:12px 0 5px}.sub{opacity:.9;font-size:17px}
+.container{max-width:1280px;margin:22px auto 60px;padding:0 16px}.nav{display:flex;gap:8px;overflow:auto;margin-bottom:18px}.nav button{white-space:nowrap;border:1px solid var(--line);background:white;padding:11px 15px;border-radius:12px;font-weight:800;color:#475467;cursor:pointer}.nav button.active{background:var(--blue);color:white;border-color:var(--blue)}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:330px 1fr;gap:18px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 28px #17255410}.card h2{margin:0 0 15px}.card h3{margin:20px 0 8px}.control{margin:17px 0}.control label{display:flex;justify-content:space-between;font-weight:800;margin-bottom:7px}.v{color:var(--blue)}input[type=range]{width:100%;accent-color:var(--blue)}select,input[type=text]{width:100%;padding:10px;border:1px solid #d6dae3;border-radius:10px;background:white;font-size:15px}button{cursor:pointer;font:inherit}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800}.primary{background:var(--blue);color:white}.soft{background:#eef2ff;color:#2742ad}.hint{background:#fff8e6;border-left:4px solid var(--gold);padding:12px;border-radius:9px;line-height:1.7;font-size:14px}
+.dashboard{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:13px;padding:12px}.stat small{color:var(--muted)}.stat b{display:block;font-size:21px;color:var(--blue);margin-top:4px}
+.labgrid{display:grid;grid-template-columns:1fr 285px;gap:15px;margin-top:16px}.plot{height:350px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(#fff,#f8faff);position:relative;overflow:hidden}.axis{position:absolute;left:6%;right:5%;bottom:55px;height:3px;background:#aeb7ca}.tick{position:absolute;bottom:34px;transform:translateX(-50%);font-size:11px;color:#667085}.point{position:absolute;width:18px;height:18px;border-radius:50%;background:#7183df;border:3px solid white;box-shadow:0 2px 7px #0002;transform:translate(-50%,50%);transition:all .35s}.point.sel{background:var(--gold);width:23px;height:23px}.marker{position:absolute;bottom:59px;width:4px;height:210px;background:var(--gold);transform:translateX(-50%);transition:left .35s}.marker:before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);border:8px solid transparent;border-bottom-color:var(--gold)}.tag{position:absolute;top:-42px;left:50%;transform:translateX(-50%);background:#fff3cf;border:1px solid #f5d47a;border-radius:8px;padding:6px 8px;white-space:nowrap;font-size:12px;font-weight:900;color:#8a5a00}
+.metrics{background:#f8fafc;border:1px solid var(--line);border-radius:15px;padding:15px}.metric{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}.metric:last-child{border:0}.metric b{color:var(--blue)}
+.legend{display:flex;gap:16px;margin-top:10px;font-size:13px}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.blue{background:#7183df}.yellow{background:var(--gold)}
+.table{display:flex;flex-wrap:wrap;gap:7px}.score{width:47px;height:40px;border:1px solid #dfe4ff;background:#f4f6ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800}.score.hit{background:#fff1c7;border-color:#efc34d;color:#8a5a00;transform:scale(1.08)}
+.box{position:relative;height:150px;margin:25px 30px}.boxaxis{position:absolute;left:0;right:0;bottom:45px;height:2px;background:#9ca3af}.boxshape{position:absolute;bottom:25px;height:40px;border:3px solid var(--blue);background:#e9eeff;border-radius:8px}.whisker{position:absolute;bottom:45px;height:2px;background:#64748b}.cap{position:absolute;bottom:32px;height:27px;width:3px;background:#64748b}.bline{position:absolute;bottom:25px;height:40px;width:3px;background:#64748b}.boxlabel{position:absolute;bottom:2px;transform:translateX(-50%);font-size:12px}.mission{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.mcard{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}.mcard.done{background:#f0fdf4;border-color:#86efac}.mcard b{display:block;margin-bottom:5px}.question{border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}.options label{display:block;padding:8px;border-radius:8px}.options label:hover{background:#f4f6ff}.feedback{font-weight:800;margin-top:8px}.correct{color:var(--green)}.wrong{color:var(--red)}.formula{background:#fafbff;border:1px dashed #cbd3f0;padding:12px;text-align:center;border-radius:10px;font-family:Georgia,serif;font-size:19px;margin:9px 0}.report{display:grid;grid-template-columns:1fr 1fr;gap:14px}.bigscore{font-size:50px;font-weight:900;color:var(--blue)}footer{text-align:center;color:#7b8496;margin-top:25px;font-size:13px}
+@media(max-width:950px){.grid,.labgrid,.report{grid-template-columns:1fr}.dashboard{grid-template-columns:repeat(2,1fr)}.mission{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><span class="badge">🔬 Interactive Mathematics • Grade 12</span><div class="title">DATA POSITION LAB</div><div class="sub">ห้องทดลองเสมือนจริง: การวัดตำแหน่งที่ของข้อมูล</div></div></header>
+
+<div class="container">
+<div class="nav">
+<button class="active" data-page="home">🏠 ภารกิจ</button>
+<button data-page="lab">🔬 ห้องทดลอง</button>
+<button data-page="box">📦 Box Plot</button>
+<button data-page="mission">🎮 Mission</button>
+<button data-page="quiz">📝 แบบประเมิน</button>
+<button data-page="report">🏆 รายงานผล</button>
+</div>
+
+<section id="home" class="page active">
+<div class="card">
+<h2>🎯 ภารกิจของนักเรียน</h2>
+<p>คุณได้รับบทเป็น <b>Data Analyst</b> ของห้องเรียน ม.6 ภารกิจคือวิเคราะห์คะแนนสอบและค้นหาว่าแต่ละค่ามีตำแหน่งอยู่ที่ใดในกลุ่มข้อมูล</p>
+<div class="hint"><b>วิธีเริ่ม:</b> ไปที่ “ห้องทดลอง” → ปรับข้อมูลด้วย Slider → สังเกต P → ทดลอง Q/D → ทำ Mission → ทำแบบประเมิน</div>
+<h3>วัตถุประสงค์</h3>
+<div class="mission">
+<div class="mcard"><b>1. ทดลอง</b>ปรับจำนวนข้อมูลและตำแหน่ง P</div>
+<div class="mcard"><b>2. สังเกต</b>ดูตำแหน่งบนเส้นจำนวน</div>
+<div class="mcard"><b>3. วิเคราะห์</b>ตีความ Q, D และ P</div>
+<div class="mcard"><b>4. เปรียบเทียบ</b>เปลี่ยนชุดข้อมูล</div>
+<div class="mcard"><b>5. สรุป</b>ทำแบบประเมิน</div>
+</div>
+</div>
+</section>
+
+<section id="lab" class="page">
+<div class="grid">
+<aside class="card">
+<h2>🎛️ Control Room</h2>
+<div class="control"><label>จำนวนข้อมูล <span class="v" id="nV">30</span></label><input id="n" type="range" min="10" max="40" value="30"></div>
+<div class="control"><label>ตำแหน่ง Percentile <span class="v">P<span id="pV">75</span></span></label><input id="p" type="range" min="1" max="99" value="75"></div>
+<div class="control"><label>ลักษณะข้อมูล</label><select id="shape"><option value="normal">กระจายสมดุล</option><option value="high">คะแนนสูงเป็นส่วนใหญ่</option><option value="low">คะแนนต่ำเป็นส่วนใหญ่</option><option value="wide">กระจายกว้าง</option></select></div>
+<button class="btn primary" id="new">🎲 สุ่มข้อมูลใหม่</button> <button class="btn soft" id="reset">รีเซ็ต</button>
+<h3>💡 นักสืบข้อมูล</h3><div class="hint">เลื่อน P จาก 25 → 50 → 75 แล้วดูว่าเส้นสีทองเคลื่อนที่อย่างไร จากนั้นเปลี่ยนรูปแบบข้อมูลโดยคง P เดิมไว้</div>
+</aside>
+<main class="card">
+<div class="dashboard">
+<div class="stat"><small>จำนวน n</small><b id="sn">30</b></div><div class="stat"><small>ต่ำสุด</small><b id="min">-</b></div><div class="stat"><small>สูงสุด</small><b id="max">-</b></div><div class="stat"><small>ตำแหน่ง</small><b>P<span id="sp">75</span></b></div><div class="stat"><small>ค่าที่ได้</small><b id="sv">-</b></div>
+</div>
+<div class="labgrid">
+<div><div class="plot" id="plot"><div class="axis"></div><div id="points"></div><div class="marker" id="marker"><div class="tag" id="tag">P75</div></div>
+<div class="tick" style="left:6%">0</div><div class="tick" style="left:28%">25</div><div class="tick" style="left:50%">50</div><div class="tick" style="left:72%">75</div><div class="tick" style="left:94%">100</div></div><div class="legend"><span><i class="blue"></i>ข้อมูล</span><span><i class="yellow"></i>ตำแหน่งที่เลือก</span></div></div>
+<div class="metrics"><h3>📍 Position Scanner</h3><div class="metric"><span>ตำแหน่งตามสูตร</span><b id="rank">-</b></div><div class="metric"><span>ค่าข้อมูล</span><b id="value">-</b></div><div class="metric"><span>ความหมาย</span><b id="meaning">-</b></div><hr><b>Q / D / P</b><div class="metric"><span>Q1</span><b id="q1">-</b></div><div class="metric"><span>Median (Q2)</span><b id="q2">-</b></div><div class="metric"><span>Q3</span><b id="q3">-</b></div></div>
+</div>
+</main></div>
+</section>
+
+<section id="box" class="page"><div class="card"><h2>📦 Box Plot Explorer</h2><p>ดูการแบ่งข้อมูลเป็น 4 ส่วนผ่าน Q1, Median และ Q3 โดยข้อมูลจะเปลี่ยนแบบ Real-time ตามชุดข้อมูลที่สุ่ม</p><div class="box" id="boxplot"><div class="boxaxis"></div></div><div class="hint"><b>ตีความ:</b> Q1 แทนตำแหน่งประมาณ 25%, Median 50%, Q3 75% ของข้อมูลที่เรียงลำดับ</div></div></section>
+
+<section id="mission" class="page"><div class="card"><h2>🎮 Data Analyst Missions</h2><p>ทำภารกิจต่อไปนี้โดยใช้ห้องทดลองช่วยตรวจสอบคำตอบ</p>
+<div class="question"><b>Mission 1 — P50</b><p>ตั้ง Slider เป็น P50 แล้วกดตรวจ</p><button class="btn primary" onclick="mission(1)">ตรวจ Mission 1</button><div id="m1"></div></div>
+<div class="question"><b>Mission 2 — P25</b><p>ตั้ง Slider เป็น P25 แล้วกดตรวจ</p><button class="btn primary" onclick="mission(2)">ตรวจ Mission 2</button><div id="m2"></div></div>
+<div class="question"><b>Mission 3 — P75</b><p>ตั้ง Slider เป็น P75 แล้วกดตรวจ</p><button class="btn primary" onclick="mission(3)">ตรวจ Mission 3</button><div id="m3"></div></div>
+<div class="question"><b>Mission 4 — เปลี่ยนข้อมูล</b><p>เปลี่ยน “ลักษณะข้อมูล” อย่างน้อย 2 แบบ แล้วสังเกตว่าค่า P75 เปลี่ยนหรือไม่</p><button class="btn primary" onclick="mission(4)">ทำเครื่องหมายว่าสังเกตแล้ว</button><div id="m4"></div></div>
+<div class="question"><b>Mission 5 — นักวิเคราะห์</b><p>เลือก P90 แล้วอธิบายความหมายของ P90 ด้วยภาษาของตนเองในช่องด้านล่าง</p><input id="missionText" type="text" placeholder="พิมพ์คำอธิบายของคุณ"><button class="btn primary" onclick="mission(5)">ส่งคำตอบ</button><div id="m5"></div></div>
+</div></section>
+
+<section id="quiz" class="page"><div class="card"><h2>📝 แบบประเมินท้ายกิจกรรม</h2>
+<div class="question"><b>ข้อ 1</b><p>จุดประสงค์ของการวัดตำแหน่งที่ของข้อมูลคืออะไร?</p><div class="options"><label><input type="radio" name="q1" value="a"> หาค่าเฉลี่ย</label><label><input type="radio" name="q1" value="b"> บอกตำแหน่งของข้อมูลเมื่อเทียบกับข้อมูลทั้งหมด</label><label><input type="radio" name="q1" value="c"> หาค่าต่ำสุด</label></div><div id="f1"></div></div>
+<div class="question"><b>ข้อ 2</b><p>P75 หมายถึงข้อใด?</p><div class="options"><label><input type="radio" name="q2" value="a"> คะแนนต้องเท่ากับ 75</label><label><input type="radio" name="q2" value="b"> มีข้อมูลประมาณ 75% อยู่ต่ำกว่าหรือเท่ากับค่านี้</label><label><input type="radio" name="q2" value="c"> มีข้อมูล 75 ค่า</label></div><div id="f2"></div></div>
+<div class="question"><b>ข้อ 3</b><p>ข้อใดถูกต้อง?</p><div class="options"><label><input type="radio" name="q3" value="a"> Q แบ่ง 4 ส่วน, D แบ่ง 10 ส่วน, P แบ่ง 100 ส่วน</label><label><input type="radio" name="q3" value="b"> Q แบ่ง 10 ส่วน, D แบ่ง 4 ส่วน</label><label><input type="radio" name="q3" value="c"> ทุกข้อถูก</label></div><div id="f3"></div></div>
+<button class="btn primary" id="check">ตรวจคำตอบ</button> <button class="btn soft" id="answers">แสดงเฉลย</button><div id="quizscore" style="margin-top:14px;font-weight:900"></div>
+</div></section>
+
+<section id="report" class="page"><div class="report"><div class="card"><h2>🏆 DATA ANALYST REPORT</h2><p>คะแนนแบบประเมิน</p><div class="bigscore" id="finalScore">0/3</div><p>ภารกิจที่ผ่าน: <b id="missionScore">0/5</b></p></div><div class="card"><h2>📊 สิ่งที่ได้เรียนรู้</h2><ul><li>เรียงข้อมูลก่อนวิเคราะห์ตำแหน่ง</li><li>Q = 4 ส่วน</li><li>D = 10 ส่วน</li><li>P = 100 ส่วน</li><li>ตำแหน่งไม่ใช่ “ค่าคะแนนเปอร์เซ็นต์”</li></ul><button class="btn primary" onclick="go('lab')">🔄 ทดลองอีกครั้ง</button></div></div></section>
+
+<footer>DATA POSITION LAB • Mathematics Grade 12 • Interactive HTML • ใช้งานแบบออฟไลน์ได้</footer>
+</div>
+<script>
+let data=[], missions=new Set(), quizScore=0;
+const $=id=>document.getElementById(id);
+function normal(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function make(){let n=+$('n').value, mode=$('shape').value;data=[];for(let i=0;i<n;i++){let z=normal(),x=65+12*z;if(mode==='high')x=76+10*z;if(mode==='low')x=52+10*z;if(mode==='wide')x=60+20*z;x=Math.round(Math.max(20,Math.min(100,x)));data.push(x)}data.sort((a,b)=>a-b);update()}
+function pct(k){let n=data.length,pos=k*(n+1)/100;if(pos<=1)return data[0];if(pos>=n)return data[n-1];let i=Math.floor(pos),f=pos-i;return data[i-1]+f*(data[i]-data[i-1])}
+function update(){let n=data.length,p=+$('p').value,val=pct(p),pos=p*(n+1)/100;$('nV').textContent=n;$('pV').textContent=p;$('sn').textContent=n;$('min').textContent=data[0];$('max').textContent=data[n-1];$('sp').textContent=p;$('sv').textContent=val.toFixed(2);$('rank').textContent=pos.toFixed(2);$('value').textContent=val.toFixed(2);$('meaning').textContent='≈ '+p+'% ต่ำกว่าหรือเท่ากับ';$('tag').textContent='P'+p+' = '+val.toFixed(1);$('marker').style.left=(6+val*.88)+'%';let pc=$('points');pc.innerHTML='';data.forEach((v,i)=>{let d=document.createElement('div');d.className='point';d.style.left=(6+v*.88)+'%';d.style.bottom=(57+(i%6)*25)+'px';if(Math.abs(v-val)<1.5)d.classList.add('sel');pc.appendChild(d)});$('q1').textContent=pct(25).toFixed(2);$('q2').textContent=pct(50).toFixed(2);$('q3').textContent=pct(75).toFixed(2);drawBox()}
+function drawBox(){let q1=pct(25),q2=pct(50),q3=pct(75),mi=data[0],ma=data[data.length-1],box=$('boxplot');box.innerHTML='<div class="boxaxis"></div>';function X(v){return v/100*100}function add(cls,left,width){let e=document.createElement('div');e.className=cls;e.style.left=X(left)+'%';if(width!==undefined)e.style.width=X(width)+'%';box.appendChild(e)}add('whisker',mi,ma-mi);add('cap',mi);add('cap',ma);add('boxshape',q1,q3-q1);add('bline',q2);[[mi,'Min'],[q1,'Q1'],[q2,'Median'],[q3,'Q3'],[ma,'Max']].forEach(([v,t])=>{let e=document.createElement('div');e.className='boxlabel';e.style.left=X(v)+'%';e.textContent=t+' '+v.toFixed(0);box.appendChild(e)})}
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id))}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
+$('n').oninput=make;$('p').oninput=update;$('shape').onchange=make;$('new').onclick=make;$('reset').onclick=()=>{$('n').value=30;$('p').value=75;$('shape').value='normal';make()};
+function mission(i){let ok=false;if(i===1)ok=+$('p').value===50;if(i===2)ok=+$('p').value===25;if(i===3)ok=+$('p').value===75;if(i===4)ok=true;if(i===5){let t=$('missionText').value.trim();ok=t.length>=15}missions.add(ok?i:0);$('m'+i).innerHTML=ok?'<span class="correct">✓ ผ่านภารกิจ</span>':'<span class="wrong">✗ ยังไม่ผ่าน ลองอีกครั้ง</span>';updateReport()}
+function updateReport(){$('missionScore').textContent=[1,2,3,4,5].filter(i=>missions.has(i)).length+'/5'}
+$('check').onclick=()=>{quizScore=0;[['q1','b'],['q2','b'],['q3','a']].forEach(([q,a],i)=>{let p=document.querySelector('input[name="'+q+'"]:checked');let f=$('f'+(i+1));if(p&&p.value===a){quizScore++;f.textContent='✓ ถูกต้อง';f.className='feedback correct'}else{f.textContent='✗ ยังไม่ถูกต้อง';f.className='feedback wrong'}});$('quizscore').textContent='คะแนน '+quizScore+'/3';$('finalScore').textContent=quizScore+'/3'};
+$('answers').onclick=()=>{$('f1').innerHTML='เฉลย: <b>ข.</b> บอกตำแหน่งของข้อมูลเมื่อเทียบกับข้อมูลทั้งหมด';$('f2').innerHTML='เฉลย: <b>ข.</b> มีข้อมูลประมาณ 75% อยู่ต่ำกว่าหรือเท่ากับค่านี้';$('f3').innerHTML='เฉลย: <b>ก.</b> Q = 4 ส่วน, D = 10 ส่วน, P = 100 ส่วน'};
+make();
+</script>
+</body>
+</html>
